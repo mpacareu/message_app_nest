@@ -16,14 +16,14 @@ export class MensajesService {
         return await this.mensajeRepository.find();
     }
 
-    async createMensaje(mensajeNuevo: MensajeDto) {
+    async createMensaje(mensajeNuevo: MensajeDto): Promise<Mensaje> {
         const nuevo = new Mensaje();
         nuevo.mensaje = mensajeNuevo.mensaje;
         nuevo.nick = mensajeNuevo.nick;
         return await this.mensajeRepository.save(nuevo);
     }
 
-    async updateMensaje(idMensaje: number, mensajeActualizar: MensajeDto) {
+    async updateMensaje(idMensaje: number, mensajeActualizar: MensajeDto): Promise<Mensaje> {
         const mensajeUpdate = await this.mensajeRepository.findOne(idMensaje);
         mensajeUpdate.mensaje = mensajeActualizar.mensaje;
         mensajeUpdate.nick = mensajeActualizar.nick;
@@ -31,7 +31,7 @@ export class MensajesService {
         return await this.mensajeRepository.save(mensajeUpdate);
     }
 
-    async delete(idMensaje: number){
+    async delete(idMensaje: number): Promise<any> {
         return await this.mensajeRepository.delete(idMensaje);
     }
 }
